@@ -15,7 +15,7 @@ compatibility: Requires git and Github CLI (gh) authenticated for the target rep
 5. Remove the created worktree.
 6. Summarize the changes implemented by the pull request 
     - Format the PR review summary as documented in this template "../assets/template.md".
-    - Follow these guidelines for the PR review summary as documented in this docoument "../assets/guidelines.md"
+    - Follow the guidelines for the PR review summary as documented in this docoument "../assets/guidelines.md"
 7. Add the summary to the PR via the following command: `gh pr comment <pr-number> --body <pr-summary>`
 
 ## Out of scope

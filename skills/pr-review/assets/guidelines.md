@@ -1,8 +1,8 @@
 # Guidelines for PR review summary
 
-- Use precise words and articulate yourself in a concise way
+- Use precise words and articulate yourself in a very concise way
 - Only provide the information asked for in the provided template
-- Don't mix file names, components/class names or code snippets into with text 
+- Don't mix file names, components/class names or code snippets into with text
 - List relevant files that have been changed in a separate unordered list
 - Follow the style of the given examples below
 

@@ -3,8 +3,8 @@
 ## Summary
 Briefly summarize the PRs content in a block text.
 Include the following information:
-- Which domains where touched?
-- Was has been updated?
+- Which domains were touched?
+- What has been updated?
     - Infrastructure
     - Business Logic
     - Interfaces
@@ -15,7 +15,7 @@ Include the following information:
 
 ## Relevant files
 List the most revelant files in an unordered list.
-Follow the style example in './guidelines.md'.
+Follow the style example in "./guidelines.md".
 
 ## Findings
 List findings of your code review regarding bugs and security risks in an unordered list.
@@ -31,4 +31,4 @@ List findings of your code review regarding code style and patterns in an unorde
 Include the following information:
 - Do the changes adhere to the existing patterns in the surrounding code?
 - Has the documentation been updated according to the changes?
-- Is the newly added or changed code covered by relevant tests (Unit tests, API tests, E2E tests)
+- Is the newly added or changed code covered by relevant tests (Unit tests, API tests, E2E tests)?

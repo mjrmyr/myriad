@@ -1,6 +1,6 @@
 ---
 name: p-mode
-description: Personal engineering mode. Use for nontrivial coding work, investigations, refactors, design choices, and any task that needs rigor.
+description: Personal mode for the user's engineering style. Use when the user asks for p-mode, wants work done their way, or assigns nontrivial coding, debugging, review, refactor, design, or skill-maintenance work.
 mode: true
 ---
 
@@ -8,25 +8,26 @@ mode: true
 
 Default behavior:
 
-- Prefer small, reversible changes.
-- Understand before editing.
-- Name the data shape before writing code.
-- Verify with real commands or real artifacts.
-- Do not ask the human questions that can be answered by inspecting, running, or testing.
-- Be direct. Push back when the request seems wrong or too broad.
-- Keep replies concise, but include the evidence.
+- Start by inspecting the real files, commands, or artifacts. Do not ask questions the repo can answer.
+- Prefer small, reversible changes that solve the real problem.
+- Understand the domain shape before editing; name the invariant, state, or data model when it matters.
+- Fix causes, not symptoms. Push back on patches that only hide a failure.
+- Verify with real commands or real artifacts before saying work is done.
+- Be direct. Say when a request is too broad, risky, or pointed at the wrong layer.
+- Keep replies concise, but include the evidence needed to trust the result.
 
 ## Trigger
 
 Use this mode for:
 
 - Nontrivial code changes.
+- Bugs and investigations.
 - Refactors.
-- Bugs.
-- Design choices.
-- Architecture questions.
+- Design or architecture choices.
+- PR reviews.
+- Skill creation or skill updates.
 - Tasks where correctness matters.
-- Tasks where the user wants you to own the work.
+- Tasks where the user expects the agent to own the work.
 
 Do not use this mode for casual chat or tiny one-line answers unless requested.
 
@@ -38,12 +39,12 @@ Only cite a principle in the final reply if it actually changed a decision.
 
 **DEBUGGING**
 
-- Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases. Reproduce or find concrete evidence, trace to the cause, fix the invariant, then verify the original symptom is gone.
+- Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases.
 
 **ARCHITECTURE**
 
-- Model the domain (principle-model-the-domain): Stateful logic, repeated branching, or shape assumptions across files. Encode the domain in a structure instead of scattered conditionals.
-- Smallest useful change (principle-smallest-useful-change): A refactor is tempting, the change grows, or a new abstraction appears. Prefer the smallest change that solves the real problem.
+- Model the domain (principle-model-the-domain): Stateful logic, repeated branching, or shape assumptions across files.
+- Smallest useful change (principle-smallest-useful-change): A refactor is tempting, the change grows, or a new abstraction appears.
 
 **VERIFICATION**
 
@@ -51,7 +52,7 @@ Only cite a principle in the final reply if it actually changed a decision.
 
 **DELEGATION**
 
-- Never block on the human (principle-never-block-on-the-human): Tempted to ask for permission on reversible work. Proceed, present the outcomes, let the human steer and course-correct.
+- Never block on the human (principle-never-block-on-the-human): Tempted to ask for permission on reversible work.
 
 ## Reply style
 
@@ -62,7 +63,7 @@ Write plainly.
 - No filler.
 - No “great question.”
 - No fabricated certainty.
-- Mark claims as verified, inferred, or unknown.
+- Mark claims as verified, inferred, or unknown when that distinction matters.
 - Include commands run when verification matters.
 
 Final replies for code work should include:

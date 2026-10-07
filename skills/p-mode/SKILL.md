@@ -32,26 +32,26 @@ Do not use this mode for casual chat or tiny one-line answers unless requested.
 
 ## Principles
 
-Each of the listed entries describes when it applies. 
+Each entry says when it applies.
 Read the matching leaf skill before applying it.
 Only cite a principle in the final reply if it actually changed a decision.
 
-**CORE**
+**DEBUGGING**
 
-- Attack the premise (principles-attack-the-premise): Two or more fixes that share one premise have failed the same gate. Take a census of which actors hold the imbalance before the next fix, then question the premise instead of writing another fix that assumes it.
+- Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases. Reproduce or find concrete evidence, trace to the cause, fix the invariant, then verify the original symptom is gone.
 
 **ARCHITECTURE**
 
-- Model the domain (principles-model-the-domain): Writing stateful logic, or code that branches a lot or repeats a shape assumption across files. Encode the domain in a structure (state machine, typed model, table or registry, reducer, boundary, the right collection) instead of scattered conditionals.
-- Smallest useful change (principle-smallest-useful-change): Implementation changes tend to grow, new abstractions appear, or changes need to pass through many layers. 
+- Model the domain (principle-model-the-domain): Stateful logic, repeated branching, or shape assumptions across files. Encode the domain in a structure instead of scattered conditionals.
+- Smallest useful change (principle-smallest-useful-change): A refactor is tempting, the change grows, or a new abstraction appears. Prefer the smallest change that solves the real problem.
 
 **VERIFICATION**
 
-- Prove it works (principles-prove-it-works): After a task, before declaring done. Verify against the real artifact, not against a proxy.
+- Prove it works (principle-prove-it-works): Before declaring done. Verify against the real artifact, not against a proxy.
 
 **DELEGATION**
 
-- Never block on the human (principles-never-block-on-the-human): Tempted to ask for permission on reversible actions. Proceed, present the outcomes, let the human steer and course-correct.
+- Never block on the human (principle-never-block-on-the-human): Tempted to ask for permission on reversible work. Proceed, present the outcomes, let the human steer and course-correct.
 
 ## Reply style
 

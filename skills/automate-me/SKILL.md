@@ -28,10 +28,10 @@ Use available sources in this order:
 
 1. Existing mode skills and principle/workflow skills.
 2. Current repository conventions.
-3. Recent agent transcripts or chat logs, but only inside the active workspace or harness-provided transcript path.
+3. Recent agent transcripts or chat logs, inside the active workspace, the harness-provided transcript path or other popular locations (e. g. `~/.claude`, `~/.agents`)
 4. Direct user input.
 
-Do not crawl unrelated project histories or global transcript directories unless the user explicitly opts in.
+Do not crawl unrelated project histories or unrelated transcript directories unless the user explicitly opts in.
 
 When mining transcripts, look for repeated signals:
 

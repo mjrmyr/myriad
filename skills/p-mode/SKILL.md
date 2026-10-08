@@ -8,25 +8,38 @@ mode: true
 
 ## Principles
 
-Each entry describe it appliance. Read the matching leaf skill before applying it.
+Each entry describes when to apply it. Read the matching leaf skill before applying it.
 Name each principle that influenced a decision and the effect it had.
 
-**Debugging**
+**Core**
 
 - Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases.
-
-**Architecture**
-
-- Model the domain (principle-model-the-domain): Stateful logic, repeated branching, or shape assumptions across files.
+- Laziness protocol (principle-laziness-protocol): Refactoring, evaluating diff size, or being tempted to add abstractions, layers, or signal threading.
+- Minimize reader load (principle-minimize-reader-load): Code is hard to trace, layers are piling up, mutable state is broad, or a reader cannot quickly answer where a value comes from.
 - Smallest useful change (principle-smallest-useful-change): A refactor is tempting, the change grows, or a new abstraction appears.
+- Subtract before you add (principle-substract-before-you-add): Sequencing an addition, refactor, or rewrite; remove dead code, redundant validators, and stubs before building.
+- Make operations idempotent (principle-make-operations-idempotent): Commands, lifecycle steps, startup, processing loops, retries, crashes, or stale partial state.
+- Outcome-oriented execution (principle-outcome-oriented-outcome): Planned rewrites or migrations with explicit phase boundaries; optimize for the final verified architecture over smooth temporary compatibility.
+
+**Architecture and design**
+
+- Boundary discipline (principle-boundary-discipline): Validation, error handling, framework adapters, external APIs, or deciding where a representation may cross a boundary.
+- Foundational thinking (principle-foundational-thinking): Choosing core types, data structures, sequencing scaffold-vs-feature work, or deciding how shared state behaves under concurrency.
+- Model the domain (principle-model-the-domain): Stateful logic, repeated branching, lifecycle rules, or shape assumptions across files.
+- Redesign from first principles (principle-redesign-from-first-principles): Integrating a new requirement into an existing design; redesign as if it had been foundational from day one.
+- Exhaust the design space (principle-exhaust-the-design-space): Novel UI interactions or architectural choices with no codebase precedent; compare 2-3 concrete alternatives first.
 
 **Verification**
 
 - Prove it works (principle-prove-it-works): Before declaring done. Verify against the real artifact, not against a proxy.
 
-**Delegation**
+**Delegation and learning**
 
 - Never block on the human (principle-never-block-on-the-human): Tempted to ask for permission on reversible work.
+
+**Meta**
+
+- Encode lessons in structure (principle-encode-lessons-in-structure): Repeated corrections, recurring instructions, or any rule that can become a lint, metadata flag, runtime check, or script.
 
 ## Autonomy
 

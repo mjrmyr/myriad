@@ -20,7 +20,7 @@ Search the active skill locations for existing `*-mode/SKILL.md` files:
 
 Prefer the format already used by the current project or agent harness. Do not assume Cursor paths or Cursor-only metadata.
 
-If a matching mode skill exists, update it instead of starting over unless the user explicitly asks for a fresh version. Preserve sections that new evidence does not contradict.
+If a matching mode skill exists, update it instead of starting over unless the user explicitly asks for a fresh version. Preserve sections that new evidence does not contradict. Do not add broad top-level sections just because the template lists them; add a section only when the user has signaled that category belongs in the mode skill.
 
 ### 1. Gather evidence
 
@@ -90,6 +90,7 @@ Guidelines:
 - Use "the user" or "the human" in instructions, not the person's name.
 - Reference other skills by name or path instead of pasting their full content.
 - Prefer bullets and imperatives.
+- Preserve the user's apparent composition style; the result should feel like a cleaned-up version of their skill, not an agent-authored template.
 - Keep it short enough that an agent will actually follow it.
 
 ### 5. Edit ruthlessly

@@ -15,7 +15,7 @@ Include the following information:
 
 ## Relevant files
 List the most revelant files in an unordered list.
-Follow the style example in "./guidelines.md".
+Follow the style example in "assets/guidelines.md".
 
 ## Findings
 List findings of your code review regarding bugs and security risks in an unordered list.

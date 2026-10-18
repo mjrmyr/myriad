@@ -18,6 +18,34 @@ Some of the principles and "traditional" skills are entangled by design especial
 The reasoning behind that is that the agents gains alternative approaches and references it can draw from for relatable tasks and problems.
 This seems to make the agent more capable. However, it also makes it more difficult to use only a subset of these skills.
 
+## Kaeno agent profiles
+
+`agents/kaeno/AGENT.md` and `agents/swe/AGENT.md` are repository-backed profiles for Kaeno's configured environment loader. They retain the homelab assistant and engineer instructions and models:
+
+- `mjrmyr/myriad:kaeno`: conversational coordinator using `openai/gpt-6-luna`, with an exact delegation/skill-reading tool list and no direct filesystem or command tools.
+- `mjrmyr/myriad:swe`: software engineer using `openai/gpt-6.1-sol`. Its `skills: [mjrmyr/myriad:*]` selects all valid skills at the resolved revision; tools are omitted so the host's approved coding/delegation defaults apply.
+
+For a runtime implementing repository-backed definitions, use one owner configuration:
+
+```json
+{
+  "sourceDirectory": "./sources",
+  "agentRepositories": ["mjrmyr/myriad:<full-commit-sha>"],
+  "skillRepositories": ["mjrmyr/myriad:<full-commit-sha>"],
+  "kaeno": {
+    "agent": "mjrmyr/myriad:kaeno",
+    "skills": ["mjrmyr/myriad:p-mode", "mjrmyr/myriad:how"]
+  },
+  "workers": ["mjrmyr/myriad:swe"]
+}
+```
+
+Replace both `<full-commit-sha>` placeholders with the **same** published 40-character commit. Start with `KAENO_CONFIG=/path/to/config.json`; relative paths resolve beside that file. The loader acquires the repository once for both catalogs. Use writable host-only persistent storage for sources; do not mount it into workers. Kubernetes execution-backend configuration remains separate from this source/role configuration.
+
+The Kaeno profile intentionally has no default skill assignments: the owner selects `p-mode` and `how` above. SWE's wildcard is expanded and frozen to concrete skills when loading/admitting work; it does not fetch new skills during a task or grant tools. Updating a pin affects future loads, not saved work.
+
+Profile frontmatter supports `name` and `description` (required), plus `model`, `thinkingLevel`, `skills`, and `tools`. Omitted tools use host defaults; an explicit list, including `[]`, is exact and must be installed/approved by the host. Additional metadata is inert, not an authority grant; delegation policy and execution-backend options belong to host configuration, not profile metadata. These profiles add no native extensions and do not install repository code. Existing skill installers below remain usable independently; a legacy Kaeno image cannot consume the new owner configuration.
+
 ## Installation
 
 This repository is public so you can use the obvious way of installing these skills via `skills.sh`.

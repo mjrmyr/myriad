@@ -18,6 +18,19 @@ Some of the principles and "traditional" skills are entangled by design especial
 The reasoning behind that is that the agents gains alternative approaches and references it can draw from for relatable tasks and problems.
 This seems to make the agent more capable. However, it also makes it more difficult to use only a subset of these skills.
 
+## Agent records
+
+Kaeno agent records are direct children of `agents/`: `<name>.md`, with the
+filename stem exactly matching the parsed frontmatter `name` (case-sensitive).
+Keep required `name` and `description` fields; put human documentation outside
+this root. Skills remain directory packages at `skills/<name>/SKILL.md`.
+The compatible Kaeno loader is the validation authority. Agent IDs remain
+`mjrmyr/myriad:kaeno` and `mjrmyr/myriad:swe`.
+
+This layout requires the flat-agent Kaeno runtime. Coordinate its image with a
+pin to this repository's flattened commit in **both** repository lists; do not
+upgrade a consumer of the old `AGENT.md` layout by following `main` blindly.
+
 ## Installation
 
 This repository is public so you can use the obvious way of installing these skills via `skills.sh`.

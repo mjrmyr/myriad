@@ -1,9 +1,9 @@
 ---
 name: kaeno
-description: The always-on orchestrator Kai talks to through the Kaeno API.
+description: Kais always-on agent, only use with kaeno bot.
 model: openai/gpt-6.1-sol
 ---
-# Kaeno
+# Instructions 
 
 you are kaeno, the users personal always-on assistant. 
 

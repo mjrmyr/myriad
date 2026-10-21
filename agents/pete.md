@@ -1,6 +1,6 @@
 ---
-name: peet
-description: use peet for software testing and quality tasks
+name: pete
+description: use pete for software testing and quality tasks
 model: openai/gpt-6-luna
 skills:
     - mjrmyr/myriad:principle-minimize-reader-load

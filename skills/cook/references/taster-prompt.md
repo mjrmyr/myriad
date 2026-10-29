@@ -33,6 +33,10 @@ Never run:
 - Compare every linked design with the running result: layout, spacing, typography and states. A visible deviation is
   Low or Medium. A missing element or state is High.
 - If the feature flag from the brief cannot be enabled where you test, the result is INCONCLUSIVE, not FAIL.
+- Run the regression exactly as the brief's verification plan says. Never run it if the brief defers it, and say so
+  in the coverage summary.
+- List every side effect outside the workspace that you caused, for example test data created in a shared
+  environment.
 - Stop everything you started before you return.
 
 ## How to verify
@@ -41,13 +45,14 @@ Run the verification skill named in the project rules, using the brief as its in
 
 1. Exercise every acceptance criterion as a user would: the happy path first, then empty, invalid and edge input.
 2. Explore the neighbours from the verification plan.
-3. Run the project's regression suite.
+3. Run the regression the brief asks for, if any.
 
 ## Report
 
 Start with the verdict:
 
-- **PASS**: the change works, regression is green, and there are no findings above Low.
+- **PASS**: the change works, the regression the brief asks for is green (regression deferred to CI does not block
+  PASS), and there are no findings above Low.
 - **PASS WITH FINDINGS**: the change works, with Medium or Low findings.
 - **FAIL**: the change does not work, a regression was found, or there is a High or Critical finding.
 - **INCONCLUSIVE**: something prevented verification. Say exactly what was not verified.

@@ -152,6 +152,7 @@ Source: <ticket url>
 ## Verification plan
 - <page, flow or command the taster must exercise>
 - <neighbouring features to explore>
+- regression: <what runs and where, following the mise-en-place, e.g. "e2e regression: no (CI)">
 
 ## Open questions
 - <question>: proposed answer <answer>
@@ -162,7 +163,10 @@ it.
 
 ## Step 3: Gate 1
 
-Show the brief and ask the user to approve it or name changes. Update the brief and ask again until they approve. On
+Show the brief and ask the user to approve it or name changes. Offer exactly two choices: **Approve**, and **Edit**,
+which must carry the requested changes in the same answer (as free text, or as notes where the question tool has
+them). If an Edit comes without its changes, ask for them in plain text instead of offering the choices again. Update
+the brief and ask again until they approve. On
 approval, tell them they can leave now and will be notified at the end. Then record the start time in `run.md`.
 
 ## Step 4: Workspace
@@ -195,6 +199,11 @@ reasoning. Fill in:
 Give the taster no file-editing tools wherever the harness allows it. If the mise-en-place names an agent for the
 taster, use that agent. Write its report to `round-<n>.md` unchanged.
 
+Tools can leave evidence files behind: screenshots, snapshots, logs. The mise-en-place says where they land. Before
+releasing the locks, move every evidence file from this round into `round-<n>-evidence/` in the run folder. The
+workspace and the user's checkout must stay clean. Tastings take turns on the lock, so files from different runs
+cannot get mixed up.
+
 Acquire the lock of every singleton the taster needs before spawning it. Once the taster has returned, make sure the
 resources are stopped and release the locks.
 
@@ -204,7 +213,7 @@ resources are stopped and release the locks.
 | --- | --- |
 | PASS, PASS WITH FINDINGS | hand-off |
 | FAIL | back to Step 5 with the findings, as long as n < 3 |
-| INCONCLUSIVE because of the environment | taste once more, then hand-off |
+| INCONCLUSIVE because of the environment | taste once more if the cause could have cleared, otherwise hand-off |
 | INCONCLUSIVE for another reason | hand-off |
 
 A High or Critical finding caused by the change counts as FAIL, whatever the verdict says. A finding the taster marks
@@ -221,7 +230,9 @@ rounds are not.
    - `## Verification`: the verdict, coverage and test counts from the last round, and the number of rounds;
    - `## Findings`: every open finding, highest severity first;
    - `## Decisions`: the content of `decisions.md`.
-3. Push the branch and open a **draft** pull request, following the Conventions.
+3. Push the branch and open a **draft** pull request, following the Conventions. Before the first push, squash the
+   round commits into one clean commit titled like the pull request; nothing is pushed yet, so no force-push is
+   needed. Never force-push. Once the branch is pushed, further changes are new commits.
 4. Finish `run.md`: end time, verdict, rounds, pull request url and interventions (write `none` if there were none).
    Add a duration summary: total time spent on the brief, cooking, tasting and waiting for locks.
 5. Notify the user (a push notification where the harness has one) with the ticket, the verdict and the pull request

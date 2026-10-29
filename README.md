@@ -18,6 +18,17 @@ Some of the principles and "traditional" skills are entangled by design especial
 The reasoning behind that is that the agents gains alternative approaches and references it can draw from for relatable tasks and problems.
 This seems to make the agent more capable. However, it also makes it more difficult to use only a subset of these skills.
 
+## The kitchen
+
+`cook` takes this one step further. It runs a ticket from intent to a verified draft pull request with me involved only
+twice: approving the brief at the start and reviewing the pull request at the end. An executive chef coordinates the
+run. A line cook implements, and a fresh taster verifies every round, until the result passes or three rounds are used
+up. The idea and the "Michelin kitchen" framing come from poteto.
+
+The skill is generic. Every project describes its own setup in a `mise-en-place` skill: ticket intake, preflight
+checks, environment, validation, verification skill, conventions, and forbidden commands. A template lives in
+`skills/cook/references/mise-en-place-template.md`.
+
 ## Installation
 
 This repository is public so you can use the obvious way of installing these skills via `skills.sh`.

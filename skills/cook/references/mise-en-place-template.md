@@ -25,8 +25,17 @@ the ticket url pattern. -->
 
 ## Environment
 
-<!-- How the taster starts and stops the application from the workspace. Name the shared and singleton resources
-(ports, containers, databases) and how to tell who owns them. -->
+<!-- How the taster starts and stops the application from the workspace, and how to tell who owns a running
+instance. -->
+
+### Singletons
+
+<!-- Resources that exist once per machine. The cook skill guards each one with a lock, so parallel kitchens taste one
+after another. Leave the table empty if the environment can run several times. -->
+
+| resource | covers | free when | max hold |
+| --- | --- | --- | --- |
+| <lock name> | <ports, containers, test accounts> | <command and expected result> | <duration> |
 
 ## Validation
 

@@ -31,7 +31,7 @@ sections are your configuration:
 | Ticket intake | where the ticket content comes from, and the ticket key format |
 | Preflight | the checks that must pass before Gate 1, each with a pass condition and a fix |
 | Workspace | how to create the isolated workspace (worktree path, branch naming) and prepare it (install steps) |
-| Environment | how to start and stop the app, and which resources are shared or singletons |
+| Environment | how to start and stop the app, and the singletons: resources that exist once per machine, each with a free check and a maximum hold time |
 | Validation | the commands the line cook runs before every commit |
 | Verification | the skill the taster runs, and anything it needs to know |
 | Conventions | commit and pull request titles, target branch, pull request body format |
@@ -53,8 +53,14 @@ draft one from the repository. Never guess a project's environment.
 
 ## Run log
 
-All state lives outside the repository, in `~/.kitchen/<project>/<TICKET>/`, where `<project>` is the repository's
-directory name:
+All state lives outside the repository, in `~/.kitchen/<project>/<TICKET>/`. `<project>` is the name of the main
+checkout's directory, which stays the same when you run from a worktree:
+
+```bash
+PROJECT=$(basename "$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")")
+```
+
+The files are:
 
 | file | content |
 | --- | --- |
@@ -62,7 +68,7 @@ directory name:
 | `decisions.md` | every decision taken without the user, with its reasoning |
 | `round-<n>.md` | the taster's full report for round n, unchanged |
 | `pr-body.md` | the pull request body |
-| `run.md` | timeline: start and end of every step, rounds, final verdict, pull request url, **interventions** |
+| `run.md` | timeline: start and end of every step, time spent waiting for locks, rounds, final verdict, pull request url, **interventions** |
 
 An intervention is anything that needed the user after Gate 1, or would have needed them. Examples:
 
@@ -75,11 +81,45 @@ Log each one in `run.md` with what happened and why. That list is how the kitche
 If `run.md` exists from an earlier run, show the user its state and ask whether to resume or start over. That question
 still counts as Gate 1.
 
+## Shared resources
+
+Several kitchens can run side by side, each in its own session and workspace. Cooking runs in parallel freely. Some
+resources exist only once per machine, for example a local stack with fixed ports or a shared test account. The
+mise-en-place lists these as **singletons** in its Environment section, each with a check for when it is free and a
+maximum hold time. Every singleton is guarded by a lock:
+
+```bash
+LOCK=~/.kitchen/$PROJECT/locks/<resource>
+```
+
+In the commands below, write the lock path out as a full absolute path instead of `$LOCK`, so that permission rules
+can match the command.
+
+- **acquire:** `mkdir -p ~/.kitchen/$PROJECT/locks && mkdir "$LOCK"` succeeds. This step is atomic. Then write
+  `$LOCK/owner` with the ticket, the workspace path and the current time.
+- **wait:** if `mkdir` fails, another run holds the lock. Wait with
+  `until mkdir "$LOCK" 2>/dev/null; do sleep 60; done`, as a background command where the harness supports it, and
+  then write the owner file. Record the wait time in `run.md`. Waiting is normal and is not an intervention.
+- **stale:** take over the lock only when its owner is clearly gone, meaning either the owner's `run.md` records a
+  finished hand-off, or the lock is older than the maximum hold time. Remove it, acquire it, and log an intervention
+  naming the stale owner.
+- **free check:** right after acquiring, run the singleton's free check. If the resource is still in use (a previous
+  holder did not clean up, or the user is using it), wait 10 minutes and check again. If it is still in use, treat it
+  as an environment INCONCLUSIVE.
+- **release:** `rm -rf "$LOCK"` as soon as the resource is stopped. Release on every path out of a step, including
+  failures and the hand-off.
+
+Hold a lock only while you use the resource, which normally means the taste step. Never hold it while cooking, at
+Gate 1, or between rounds, so other kitchens can taste while your line cook fixes findings.
+
 ## Step 1: Preflight
 
 Run every preflight check from the mise-en-place before the user leaves. Report all failures at once, each with its
 fix, and stop. Never continue past a failed preflight. A failure found now costs the user a minute. The same failure
 found mid-run costs them the whole run.
+
+A singleton that is busy because another kitchen holds its lock passes preflight, because this run will wait its turn.
+A singleton that is busy without a lock belongs to someone outside the kitchen, and that fails preflight.
 
 ## Step 2: Brief
 
@@ -155,6 +195,9 @@ reasoning. Fill in:
 Give the taster no file-editing tools wherever the harness allows it. If the mise-en-place names an agent for the
 taster, use that agent. Write its report to `round-<n>.md` unchanged.
 
+Acquire the lock of every singleton the taster needs before spawning it. Once the taster has returned, make sure the
+resources are stopped and release the locks.
+
 ## Step 7: Loop
 
 | taster verdict | next |
@@ -172,13 +215,15 @@ rounds are not.
 
 ## Step 8: Hand-off
 
-1. Make sure everything the workers started is stopped, as the Environment section describes.
+1. Make sure everything the workers started is stopped, as the Environment section describes, and that this run
+   holds no lock any more.
 2. Write `pr-body.md` in the project's format, then append these sections:
    - `## Verification`: the verdict, coverage and test counts from the last round, and the number of rounds;
    - `## Findings`: every open finding, highest severity first;
    - `## Decisions`: the content of `decisions.md`.
 3. Push the branch and open a **draft** pull request, following the Conventions.
 4. Finish `run.md`: end time, verdict, rounds, pull request url and interventions (write `none` if there were none).
+   Add a duration summary: total time spent on the brief, cooking, tasting and waiting for locks.
 5. Notify the user (a push notification where the harness has one) with the ticket, the verdict and the pull request
    url.
 6. Report the same in the session, together with the number of interventions and the path of `run.md`. Keep the

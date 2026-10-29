@@ -35,8 +35,8 @@ Never run:
 - If the feature flag from the brief cannot be enabled where you test, the result is INCONCLUSIVE, not FAIL.
 - Run the regression exactly as the brief's verification plan says. Never run it if the brief defers it, and say so
   in the coverage summary.
-- List every side effect outside the workspace that you caused, for example test data created in a shared
-  environment.
+- Name test data you create in shared environments so it is recognizable as yours (the project rules say how),
+  and delete it before you return. List every side effect outside the workspace that you caused and could not undo.
 - Stop everything you started before you return.
 
 ## How to verify

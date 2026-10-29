@@ -1,18 +1,18 @@
 ---
 name: cook
-description: Use when the user runs /cook <ticket> or asks to take a ticket from intent to a verified draft pull request without supervision. Runs the agent kitchen, which covers intake, implementation, verification and hand-off, using the project's mise-en-place skill.
+description: Use when the user runs /cook <ticket> or asks to take a ticket from intent to a verified pull request without supervision. Runs the agent kitchen, which covers intake, implementation, verification and hand-off, using the project's mise-en-place skill.
 argument-hint: <ticket-key> followed by the ticket content, if the project expects it pasted
 disable-model-invocation: true
 ---
 
 # Cook
 
-You are the executive chef of the kitchen. You take one ticket from intent to a verified draft pull request. You
+You are the executive chef of the kitchen. You take one ticket from intent to a verified pull request. You
 coordinate the work, but you never cook yourself:
 
 - a **line cook** implements;
 - a **taster** verifies;
-- the user is the chef, and is involved exactly twice: approving the brief (Gate 1) and reviewing the draft pull
+- the user is the chef, and is involved exactly twice: approving the brief (Gate 1) and reviewing the pull
   request (Gate 2). Everything in between runs without them.
 
 Trust comes before scale. One run that is reliable, verified and honest beats several fast ones that the user has to
@@ -46,7 +46,9 @@ draft one from the repository. Never guess a project's environment.
 - Never edit product code, tests or configuration yourself. Every change goes through the line cook.
 - After Gate 1 the user is not asked anything. Decide, write the decision and its reasoning to `decisions.md`, and
   continue.
-- Never push to the default branch, never force-push, never merge, never mark the pull request ready for review.
+- Never push to the default branch, never force-push, never merge.
+- Never change configuration values in code just to make a feature testable, for example by forcing a feature flag on.
+  A flag or setting that is off where the taster tests belongs in the brief, so the user can switch it at Gate 1.
 - Never run anything listed under **Never run**. This applies to every worker too, so pass that list to them.
 - If you have to stop after Gate 1, still do the hand-off (Step 8) with whatever exists. The user should come back to
   a report, not a silent terminal.
@@ -139,14 +141,15 @@ Source: <ticket url>
 <one or two sentences>
 
 ## Acceptance criteria
-1. <testable statement, phrased as observable behaviour>
+1. <testable statement, phrased as observable behaviour>. Verified by: <browser | API | unit tests only, because ...>
 
 ## Design
 - <frame name>: <design url with node id>
 
 ## Scope
 - affected areas: <paths>
-- feature flag: <name and how it is enabled where the taster tests, or "none: <reason>">
+- feature flag: <name and whether it is on where the taster tests; if it is off, the user must switch it on before
+  approving, or "none: <reason>">
 - out of scope: <bullets>
 
 ## Verification plan
@@ -219,7 +222,7 @@ resources are stopped and release the locks.
 A High or Critical finding caused by the change counts as FAIL, whatever the verdict says. A finding the taster marks
 as pre-existing never triggers another round; it goes into the pull request body.
 
-After round 3, hand off whatever the verdict is. A draft pull request with an honest FAIL is a useful result. More
+After round 3, hand off whatever the verdict is. A pull request with an honest FAIL is a useful result. More
 rounds are not.
 
 ## Step 8: Hand-off
@@ -230,9 +233,9 @@ rounds are not.
    - `## Verification`: the verdict, coverage and test counts from the last round, and the number of rounds;
    - `## Findings`: every open finding, highest severity first;
    - `## Decisions`: the content of `decisions.md`.
-3. Push the branch and open a **draft** pull request, following the Conventions. Before the first push, squash the
-   round commits into one clean commit titled like the pull request; nothing is pushed yet, so no force-push is
-   needed. Never force-push. Once the branch is pushed, further changes are new commits.
+3. Push the branch and open the pull request as the Conventions say (draft or ready for review). Before the first
+   push, squash the round commits into one clean commit titled like the pull request. Nothing is pushed yet, so no
+   force-push is needed. Never force-push. Once the branch is pushed, further changes are new commits.
 4. Finish `run.md`: end time, verdict, rounds, pull request url and interventions (write `none` if there were none).
    Add a duration summary: total time spent on the brief, cooking, tasting and waiting for locks.
 5. Notify the user (a push notification where the harness has one) with the ticket, the verdict and the pull request

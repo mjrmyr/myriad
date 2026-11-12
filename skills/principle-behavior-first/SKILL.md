@@ -9,13 +9,13 @@ disable-model-invocation: true
 Start with what should happen, not with how the current code could be extended.
 The implementation is evidence of what happens today, not authority for what should happen.
 
-- Describe the expected observable behavior independently of a proposed API or implementation. Ground it in the user's goal, existing contracts, and relevant callers; distinguish established intent from assumptions.
+- Describe the expected observable behavior independently of a proposed API or implementation. Ground it in the user's goal, existing contracts, and relevant callers. Distinguish established intent from assumptions.
 - For a suspected defect, obtain concrete evidence of the mismatch: a reproduction, failing behavioral test, trace, or observed state. For a new capability, identify the missing behavior rather than treating the absence of a particular tool as the problem.
 - Trace intended state ownership and lifetime. Which entity should own the identity or invariant? What should survive a retry, restart, replacement worker, or concurrent actor? Compare that with where the implementation actually stores and changes it.
-- Compare the smallest repair at that owner with a caller workaround or new tool. Prefer restoring the intended behavior over exposing an implementation accident as a new concept. A workaround can be justified by real constraints; make its limits clear.
+- Compare the smallest repair at that owner with a caller workaround or new tool. Prefer restoring the intended behavior over exposing an implementation accident as a new concept. A workaround can be justified by real constraints, but make its limits clear.
 - Where relevant, turn the expected behavior into runnable behavioral or lifecycle tests. Assert the user-visible result and what survives transitions, not merely that a new helper was called.
 
-Use [Fix root causes](../principle-fix-root-causes/SKILL.md) for tracing and repair, and [Prove it works](../principle-prove-it-works/SKILL.md) for verification. This is a reasoning aid, not a required report format or approval step; scale the investigation to the uncertainty and risk. Skills guide judgment, not enforce correctness.
+Use [Fix root causes](../principle-fix-root-causes/SKILL.md) for tracing and repair, and [Prove it works](../principle-prove-it-works/SKILL.md) for verification. This is a reasoning aid, not a required report format or approval step. Scale the investigation to the uncertainty and risk. Skills guide judgment, not enforce correctness.
 
 ## Example: publication after worker replacement
 

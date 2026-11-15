@@ -18,6 +18,10 @@ Some of the principles and "traditional" skills are entangled by design especial
 The reasoning behind that is that the agents gains alternative approaches and references it can draw from for relatable tasks and problems.
 This seems to make the agent more capable. However, it also makes it more difficult to use only a subset of these skills.
 
+## Kaeno
+
+Kaeno owns its persona and instructions in [the Kaeno repository](https://github.com/mjrmyr/kaeno). It consumes Myriad skills, not Myriad agent definitions.
+
 ## Installation
 
 This repository is public so you can use the obvious way of installing these skills via `skills.sh`.

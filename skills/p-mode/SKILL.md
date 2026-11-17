@@ -13,6 +13,7 @@ Name each principle that influenced a decision and the effect it had.
 
 **Core**
 
+- Conventions (conventions): Writing code, commits, PRs, or docs in any repository; follow the owner's rules for comments, compatibility, commit messages, and PR shape.
 - Behavior first (principle-behavior-first): Investigating a mismatch, designing a change, or proposing a new tool; establish expected behavior and state ownership before choosing a solution.
 - Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases.
 - Laziness protocol (principle-laziness-protocol): Refactoring, evaluating diff size, or being tempted to add abstractions, layers, or signal threading.

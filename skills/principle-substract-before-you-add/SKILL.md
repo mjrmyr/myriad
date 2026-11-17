@@ -19,3 +19,4 @@ Design for observed usage, not speculative edge cases
 No speculative validators, parsers, or guards beyond what the spec demands
 Simplify prompts (remove redundant instructions, excessive templates)
 When a reference has no novel content, delete it rather than leaving a stub
+Everything has to earn its place: no test-only constructs in production code, no tests or scripts that aren't needed, no setup the feature doesn't justify ("keep it simple, keep it minimal, it just needs to work for the start")

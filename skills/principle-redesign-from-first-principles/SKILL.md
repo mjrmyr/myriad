@@ -11,5 +11,6 @@ When integrating a change, don't bolt it onto the existing design. Redesign as i
 - Ask: "if we were writing this from scratch with this new requirement, what would we build?"
 - Propagate the change through every reference: types, docs, examples, rationale sections
 - Think about the whole redesign, then deliver it incrementally
+- If the change adds a hook, an optional field or a new seam that only one caller uses, it is "a patch rather than a feature"; look for the version that needs none
 
 This is the method for preserving option value when integrating changes into an existing design.

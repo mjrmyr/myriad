@@ -20,7 +20,6 @@ Validation and error handling:
 - Do not re-export transport, storage, framework, or wire types through the public surface
 - No redundant nil checks deep in call chains if the boundary already validated
 - Validate configuration strictly and fail loudly at startup
-- At runtime, a failing integration degrades as narrowly as possible: drop the one tool, not the server; log, don't crash the host
 
 Code organization:
 - Business logic in pure functions with no framework dependencies

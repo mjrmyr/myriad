@@ -10,7 +10,7 @@ mode: true
 
 Read the matching skill before writing code, commits, PRs, or docs, in any repository.
 
-- Code style (code-style): Writing or reviewing code; no comments, explicit names and structure, neutral identifiers.
+- Code style (code-style): Writing or reviewing code; no comments, explicit names and structure.
 - Git workflow (git-workflow): Committing, branching, pushing, or opening a PR; commit format, granularity, and sharing a branch with other agents.
 - Docs and communication (docs-and-communication): Writing docs, PR descriptions, or replies; no design docs in the repo, short answers with a recommendation.
 

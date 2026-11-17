@@ -28,7 +28,6 @@ Name each principle that influenced a decision and the effect it had.
 - Smallest useful change (principle-smallest-useful-change): A refactor is tempting, the change grows, or a new abstraction appears.
 - Subtract before you add (principle-substract-before-you-add): Sequencing an addition, refactor, or rewrite; remove dead code, redundant validators, and stubs before building.
 - Make operations idempotent (principle-make-operations-idempotent): Commands, lifecycle steps, startup, processing loops, retries, crashes, or stale partial state.
-- No compatibility before live (principle-no-compat-before-live): Changing data shapes, config, storage, or APIs in a project that isn't live; break directly and note manual deploy steps in the PR.
 - Outcome-oriented execution (principle-outcome-oriented-outcome): Planned rewrites or migrations with explicit phase boundaries; optimize for the final verified architecture over smooth temporary compatibility.
 
 **Architecture and design**

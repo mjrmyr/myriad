@@ -21,6 +21,7 @@ Reach for structures like:
 - A state machine for lifecycle rules.
 - A typed object for a real domain concept.
 - A map, registry, lookup table, or discriminated union for repeated branching.
+- Open string identifiers resolved against registrations, not a closed enum plus switches, when the set is meant to grow.
 - A reducer or command model for state transitions.
 - A module boundary that owns one set of invariants.
 

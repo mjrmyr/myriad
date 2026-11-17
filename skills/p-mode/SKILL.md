@@ -6,6 +6,14 @@ mode: true
 
 # P-Mode
 
+## Conventions
+
+Read the matching skill before writing code, commits, PRs, or docs, in any repository.
+
+- Code style (code-style): Writing or reviewing code; no comments, explicit names and structure.
+- Git workflow (git-workflow): Committing, branching, pushing, or opening a PR; commit format, granularity, and sharing a branch with other agents.
+- Docs and communication (docs-and-communication): Writing docs, PR descriptions, or replies; no design docs in the repo, short answers with a recommendation.
+
 ## Principles
 
 Each entry describes when to apply it. Read the matching leaf skill before applying it.
@@ -25,6 +33,8 @@ Name each principle that influenced a decision and the effect it had.
 **Architecture and design**
 
 - Boundary discipline (principle-boundary-discipline): Validation, error handling, framework adapters, external APIs, or deciding where a representation may cross a boundary.
+- Required over optional (principle-required-over-optional): Adding a parameter, field, or mode, or reaching for a default fallback.
+- Code lives with its owner (principle-code-lives-with-its-owner): Deciding where a capability, its config, or its startup checks go.
 - Foundational thinking (principle-foundational-thinking): Choosing core types, data structures, sequencing scaffold-vs-feature work, or deciding how shared state behaves under concurrency.
 - Model the domain (principle-model-the-domain): Stateful logic, repeated branching, lifecycle rules, or shape assumptions across files.
 - Redesign from first principles (principle-redesign-from-first-principles): Integrating a new requirement into an existing design; redesign as if it had been foundational from day one.

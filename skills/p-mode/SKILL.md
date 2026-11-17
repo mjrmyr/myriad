@@ -6,6 +6,14 @@ mode: true
 
 # P-Mode
 
+## Conventions
+
+Read the matching skill before writing code, commits, PRs, or docs, in any repository.
+
+- Code style (code-style): Writing or reviewing code; no comments, explicit names and structure, neutral identifiers.
+- Git workflow (git-workflow): Committing, branching, pushing, or opening a PR; commit format, granularity, and sharing a branch with other agents.
+- Docs and communication (docs-and-communication): Writing docs, PR descriptions, or replies; no design docs in the repo, short answers with a recommendation.
+
 ## Principles
 
 Each entry describes when to apply it. Read the matching leaf skill before applying it.
@@ -13,7 +21,6 @@ Name each principle that influenced a decision and the effect it had.
 
 **Core**
 
-- Conventions (conventions): Writing code, commits, PRs, or docs in any repository; follow the owner's rules for comments, compatibility, commit messages, and PR shape.
 - Behavior first (principle-behavior-first): Investigating a mismatch, designing a change, or proposing a new tool; establish expected behavior and state ownership before choosing a solution.
 - Fix root causes (principle-fix-root-causes): Debugging, repeated symptoms, suspicious guards, or fixes that look like special cases.
 - Laziness protocol (principle-laziness-protocol): Refactoring, evaluating diff size, or being tempted to add abstractions, layers, or signal threading.

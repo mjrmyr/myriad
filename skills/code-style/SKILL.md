@@ -1,6 +1,6 @@
 ---
 name: code-style
-description: The owner's rules for how code reads: no comments, explicit names and structure. Load whenever writing or reviewing code for the owner, in any repository.
+description: The owner's rules for how code reads. No comments, explicit names and structure. Load whenever writing or reviewing code for the owner, in any repository.
 ---
 
 # Code Style
